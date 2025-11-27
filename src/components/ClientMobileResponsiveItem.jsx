@@ -11,10 +11,11 @@ const ClientMobileResponsiveItem = ({
 	activeCollapse,
 	handleCollapse,
 }) => {
+	console.log("check", activeCollapse);
 	return (
 		<div className="card">
 			<div
-				onClick={() => handleCollapse(data.id)}
+				onClick={() => handleCollapse(data._id)}
 				className="flex items-center justify-between">
 				<div className="flex items-center gap-2.5">
 					<h6 className="max-w-[110px] truncate xs:max-w-[160px]">
@@ -25,15 +26,15 @@ const ClientMobileResponsiveItem = ({
 				<div className="flex items-center gap-4">
 					<button
 						className={`collapse-btn ${
-							activeCollapse === data.id ? "active" : ""
+							activeCollapse === data._id ? "active" : ""
 						}`}
 						aria-label="Toggle view"
-						onClick={() => handleCollapse(data.id)}>
+						onClick={() => handleCollapse(data._id)}>
 						<i className="icon icon-caret-down-solid" />
 					</button>
 				</div>
 			</div>
-			<Collapse in={activeCollapse === data.id}>
+			<Collapse in={activeCollapse === data._id}>
 				<table className="basic-table">
 					<tbody>
 						<tr>

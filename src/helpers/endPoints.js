@@ -1,6 +1,5 @@
 import moment from "moment";
 import { base } from "./apiServices";
-export const ADMIN_ID = "67dab4d2c19fb49de49e9dc8";
 export function formatTimestampWithMoment(timestamp) {
 	const now = moment();
 	const date = moment(timestamp);

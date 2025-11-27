@@ -17,13 +17,6 @@ const ClientMobileResponsiveItem = ({
 				onClick={() => handleCollapse(data.id)}
 				className="flex items-center justify-between">
 				<div className="flex items-center gap-2.5">
-					<div className="img-wrapper flex items-center justify-center w-10 h-10">
-						<img
-							className="w-100 h-100 object-cover"
-							src={data?.profileImage}
-							alt={data?.username}
-						/>
-					</div>
 					<h6 className="max-w-[110px] truncate xs:max-w-[160px]">
 						{data?.username}
 					</h6>
@@ -52,39 +45,17 @@ const ClientMobileResponsiveItem = ({
 							<td className="label-text">{data?.email ?? "--"}</td>
 						</tr>
 						<tr>
-							<td>Country</td>
-							<td className="label-text">{data?.country ?? "--"}</td>
+							<td>Current Plan</td>
+							<td className="label-text">{data?.activePlan ?? "--"}</td>
 						</tr>
 						<tr>
-							<td>EA Id</td>
-							<td className="label-text">{data?.ea_ID ?? "--"}</td>
+							<td>Status</td>
+							<td className="label-text">
+								{data?.isExpired ? "Expired" : "Active"}
+							</td>
 						</tr>
 						<tr>
-							<td>DOB</td>
-							<td className="label-text">{data?.dob ?? "--"}</td>
-						</tr>
-						<tr>
-							<td>Wins</td>
-							<td className="label-text">{data?.winMatches ?? "0"}</td>
-						</tr>
-						<tr>
-							<td>Losses</td>
-							<td className="label-text">{data?.loseMatches ?? "0"}</td>
-						</tr>
-						<tr>
-							<td>Draws</td>
-							<td className="label-text">{data?.drawMatches ?? "0"}</td>
-						</tr>
-						<tr>
-							<td>Total Matches</td>
-							<td className="label-text">{data?.totalMatches ?? "0"}</td>
-						</tr>
-						<tr>
-							<td>Trophies</td>
-							<td className="label-text">{data?.trophies ?? "--"}</td>
-						</tr>
-						<tr>
-							<td>Last Seen</td>
+							<td>Last Login</td>
 							<td className="label-text">
 								{data?.lastLoggedIn !== "Never logged in"
 									? dayjs().diff(dayjs(data?.lastLoggedIn), "hour") < 24
@@ -96,10 +67,10 @@ const ClientMobileResponsiveItem = ({
 						<tr>
 							<td>Signed Up Since</td>
 							<td className="label-text">
-								{data?.signUpSince
-									? dayjs().diff(dayjs(data?.signUpSince), "hour") < 24
-										? dayjs(data?.signUpSince).fromNow()
-										: dayjs(data?.signUpSince).format("DD/MM/YYYY hh:mm a")
+								{data?.createdAt
+									? dayjs().diff(dayjs(data?.createdAt), "hour") < 24
+										? dayjs(data?.createdAt).fromNow()
+										: dayjs(data?.createdAt).format("DD/MM/YYYY hh:mm a")
 									: "--"}
 							</td>
 						</tr>

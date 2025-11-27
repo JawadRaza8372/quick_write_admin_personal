@@ -9,15 +9,16 @@ const developmentLink =
 	"https://wc0osk40ko8k0gswcgcowgwk.91.108.126.5.sslip.io/";
 const isProduction = false;
 const mainUrl = isProduction ? productionLink : developmentLink;
+const apiKey = import.meta.env.VITE_API_KEY ?? process.env.VITE_API_KEY;
 // ⚙️ Axios instance
 const base = axios.create({
 	baseURL: mainUrl,
 	headers: {
 		"Content-Type": "application/json",
-		"x-api-key": import.meta.env.VITE_API_KEY,
+		"x-api-key": apiKey,
 	},
 });
-console.log("check", import.meta.env.VITE_API_KEY);
+console.log("check", apiKey);
 // 🔐 Helper to dynamically attach/remove token
 const setAuthToken = (token) => {
 	if (token) {

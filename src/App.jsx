@@ -110,10 +110,10 @@ const App = () => {
 					//console.log("err", err);
 				});
 		}
-	}, []);
+	}, [dispatch]);
 	useEffect(() => {
 		fetchSavedTokenFromDb();
-	}, []);
+	}, [fetchSavedTokenFromDb]);
 	return (
 		<ThemeProvider theme={{ theme: "dark" }}>
 			<ThemeStyles />

@@ -18,7 +18,6 @@ const base = axios.create({
 		"x-api-key": apiKey,
 	},
 });
-console.log("check", apiKey);
 // 🔐 Helper to dynamically attach/remove token
 const setAuthToken = (token) => {
 	if (token) {
@@ -32,11 +31,9 @@ base.interceptors.request.use(
 		if (config.isPublic) return config;
 
 		const { accessToken } = await getUserTokenfromStorage();
-		console.log("🔑 Access token found:");
 
 		if (accessToken) {
 			config.headers.Authorization = `Bearer ${accessToken}`;
-			console.log("🔑 Access token attcheched");
 		}
 		return config;
 	},
@@ -63,7 +60,7 @@ base.interceptors.response.use(
 				}
 				// call backend refresh route
 				const res = await base.post(
-					`auth/renew-token`,
+					`admin/admin-renew-token`,
 					{
 						refreshToken: refreshToken,
 					},
@@ -71,7 +68,6 @@ base.interceptors.response.use(
 						isPublic: true,
 					}
 				);
-				console.log("requested new tokenns");
 				const newAccessToken = res?.data?.accessToken;
 				const newRefreshToken = res?.data?.refreshToken;
 				await saveUserTokenToStorage(newAccessToken, newRefreshToken);
@@ -81,7 +77,6 @@ base.interceptors.response.use(
 					"Authorization"
 				] = `Bearer ${newAccessToken}`;
 				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-				console.log("retrying orignal request");
 				return base(originalRequest); // retry original request
 			} catch (refreshError) {
 				console.error("Token refresh failed:", refreshError);
